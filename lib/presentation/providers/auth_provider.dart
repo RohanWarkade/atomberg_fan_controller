@@ -84,7 +84,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       },
       (hasCredentials) async {
         if (hasCredentials) {
-          // Try to get valid access token
+          
           final tokenResult = await authRepository.getValidAccessToken();
           state = state.copyWith(
             isLoading: false,

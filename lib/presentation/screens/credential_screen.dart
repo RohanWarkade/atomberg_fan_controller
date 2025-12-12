@@ -54,31 +54,7 @@ class _CredentialScreenState extends ConsumerState<CredentialScreen> {
     final authState = ref.watch(authProvider);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   elevation: 0,
-      //   flexibleSpace: Container(
-      //     decoration: const BoxDecoration(
-      //       gradient: LinearGradient(
-      //         colors: [
-      //           Color.fromARGB(174, 100, 47, 10), // Atomberg Orange
-      //           Color.fromARGB(255, 209, 98, 19),
-      //         ],
-      //         begin: Alignment.topLeft,
-      //         end: Alignment.bottomRight,
-      //       ),
-      //     ),
-      //   ),
-      //   title: const Text(
-      //     'Atomberg Credentials',
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.w700,
-      //       fontSize: 20,
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      //   iconTheme: const IconThemeData(color: Colors.white),
-      // ),
+     
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,

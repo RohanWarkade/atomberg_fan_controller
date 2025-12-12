@@ -21,19 +21,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   void initState() {
     super.initState();
 
-    // Border animation (2 seconds)
     borderController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     )..forward();
 
-    // Rotating fan animation
     fanController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
     )..repeat();
 
-    // Navigate after 3 seconds
     Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
       Navigator.pushReplacement(
@@ -71,7 +68,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Top static Atomberg logo
                   Image.asset(
                     "assets/images/atomberg_logo.png",
                     width: 160,
@@ -79,7 +75,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
                   const SizedBox(height: 30),
 
-                  // Rotating fan image
                   RotationTransition(
                     turns: fanController,
                     child: Image.asset(
@@ -111,7 +106,7 @@ class BorderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const borderColor = Color(0xFFFF6A00); // Atomberg orange
+    const borderColor = Color(0xFFFF6A00); 
     const borderWidth = 2.0;
 
     final paint = Paint()
@@ -122,15 +117,15 @@ class BorderPainter extends CustomPainter {
     final path = Path();
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
-    // Total perimeter of the rectangle
+    
     final perimeter = (rect.width * 2) + (rect.height * 2);
 
-    // How much of the border to draw based on progress
+    
     final currentLength = perimeter * progress;
 
     double remaining = currentLength;
 
-    // Top side
+    
     if (remaining <= rect.width) {
       path.moveTo(0, 0);
       path.lineTo(remaining, 0);
@@ -142,7 +137,7 @@ class BorderPainter extends CustomPainter {
       remaining -= rect.width;
     }
 
-    // Right side
+    
     if (remaining <= rect.height) {
       path.moveTo(rect.width, 0);
       path.lineTo(rect.width, remaining);
@@ -154,7 +149,7 @@ class BorderPainter extends CustomPainter {
       remaining -= rect.height;
     }
 
-    // Bottom side
+    
     if (remaining <= rect.width) {
       path.moveTo(rect.width, rect.height);
       path.lineTo(rect.width - remaining, rect.height);
@@ -166,7 +161,7 @@ class BorderPainter extends CustomPainter {
       remaining -= rect.width;
     }
 
-    // Left side
+    
     if (remaining <= rect.height) {
       path.moveTo(0, rect.height);
       path.lineTo(0, rect.height - remaining);
