@@ -18,7 +18,7 @@ class _CredentialScreenState extends ConsumerState<CredentialScreen> {
   @override
   void initState() {
     super.initState();
-    // Check auth status on init
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkAuthStatus();
     });
@@ -26,7 +26,7 @@ class _CredentialScreenState extends ConsumerState<CredentialScreen> {
 
   Future<void> _checkAuthStatus() async {
     await ref.read(authProvider.notifier).checkAuthStatus();
-    
+
     if (mounted && ref.read(authProvider).isAuthenticated) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const DevicesScreen()),
@@ -54,9 +54,89 @@ class _CredentialScreenState extends ConsumerState<CredentialScreen> {
     final authState = ref.watch(authProvider);
 
     return Scaffold(
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   elevation: 0,
+      //   flexibleSpace: Container(
+      //     decoration: const BoxDecoration(
+      //       gradient: LinearGradient(
+      //         colors: [
+      //           Color.fromARGB(174, 100, 47, 10), // Atomberg Orange
+      //           Color.fromARGB(255, 209, 98, 19),
+      //         ],
+      //         begin: Alignment.topLeft,
+      //         end: Alignment.bottomRight,
+      //       ),
+      //     ),
+      //   ),
+      //   title: const Text(
+      //     'Atomberg Credentials',
+      //     style: TextStyle(
+      //       fontWeight: FontWeight.w700,
+      //       fontSize: 20,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      //   iconTheme: const IconThemeData(color: Colors.white),
+      // ),
       appBar: AppBar(
-        title: const Text('Atomberg Credentials'),
+        centerTitle: true,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(174, 100, 47, 10),
+                Color.fromARGB(255, 209, 98, 19),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text(
+          'Atomberg Credentials',
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+
+        // 🔥 ACTION BUTTON ON RIGHT SIDE
+        actions: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.language, color: Colors.white),
+            onSelected: (value) {
+              // You can trigger Riverpod provider here
+              // ref.read(languageProvider.notifier).state = value;
+              debugPrint("Selected Language: $value");
+            },
+            color: Colors.black87,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'en',
+                child: Text(
+                  'English',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'hi',
+                child: Text(
+                  'हिन्दी',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
+
       body: authState.isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -75,9 +155,10 @@ class _CredentialScreenState extends ConsumerState<CredentialScreen> {
                     const SizedBox(height: 24),
                     Text(
                       'Atomberg Fan Controller',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                     const SizedBox(height: 8),
                     Text(

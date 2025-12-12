@@ -6,7 +6,7 @@ class ControlCard extends StatelessWidget {
 
   const ControlCard({Key? key, required this.child}) : super(key: key);
 
-  // Switch Control Factory
+  
   factory ControlCard.switchControl({
     required String title,
     required String subtitle,
@@ -23,7 +23,7 @@ class ControlCard extends StatelessWidget {
     );
   }
 
-  // Speed Control Factory
+  
   factory ControlCard.speedControl({
     required int speed,
     required ValueChanged<int> onSpeedChanged,
@@ -63,7 +63,7 @@ class ControlCard extends StatelessWidget {
     );
   }
 
-  // Timer Control Factory
+  
   factory ControlCard.timerControl({
     required int timerHours,
     required ValueChanged<int> onTimerChanged,
@@ -102,7 +102,7 @@ class ControlCard extends StatelessWidget {
     );
   }
 
-  // Brightness Control Factory
+  
   factory ControlCard.brightnessControl({
     required int brightness,
     required ValueChanged<int> onBrightnessChanged,
@@ -130,7 +130,7 @@ class ControlCard extends StatelessWidget {
     );
   }
 
-  // Color Control Factory
+  
   factory ControlCard.colorControl({
     required String colorMode,
     required ValueChanged<String> onColorChanged,
